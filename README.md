@@ -28,6 +28,7 @@ Crash Course for Cloudbreak for Data Works Summit 2018 San Jose.
   - [e. Terminate a cluster](#4-managing-and-monitoring-clusters)
   - [f. Force terminate a cluster](#4-managing-and-monitoring-clusters)
   - [g. View cluster history](#4-managing-and-monitoring-clusters)
+  - [h. History report content](#4-managing-and-monitoring-clusters)
 - [5. Autoscaling](#5-autoscaling)
   - [a. Enable Auto Scaling](#a-enable-auto-scaling)
   - [b. Defining an Alert](#b-defining-an-alert)
@@ -41,6 +42,7 @@ Crash Course for Cloudbreak for Data Works Summit 2018 San Jose.
   - [e. Security](#e-security)
   - [f. Cluster Summary](#f-cluster-summary)
   - [g. Ambari](#g-ambari)
+ - [7. Further Resources](#7-futher-resources)
 ---------------
 
 # Cloudbreak launches clusters on the cloud in 3 easy steps:
@@ -90,9 +92,13 @@ Get the Access Key and Secret Key from the [Prerequisites section](aws_prerequis
 Click the Create Cluster button and the Create Cluster wizard is displayed.
 
 By default, Basic view is displayed.
-**Select Credentials** Choose a previously created credential  
-**Cluster Name**: Enter a name for your cluster. The name must be between 5 and 40 characters, must start with a letter, and must only include lowercase letters, numbers, and hyphens  
+
+**Select Credentials**: Choose a previously created credential  
+
+**Cluster Name**: Enter a name for your cluster (The name must be between 5 and 40 characters, must start with a letter, and must only include lowercase letters, numbers, and hyphens)  
+
 **Region**: Select the region in which you would like to launch your cluster  
+
 **Cluster Type**: Choose one of default cluster configurations  
 
   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/GeneralConfig27.png)
@@ -117,15 +123,18 @@ Go with default Network setup
 
 ### e. HDP Security
 Provide the following:  
+
 **Cluster User**: This will be the user that you should use to log in to Ambari and other cluster UIs. By default, this is admin.  
+
 **Cluster Password**: Password for the cluster user.  
+
 **SSH public key**: Select the existing public SSH key or paste your key. The key will be placed on the cluster VMs so that you can use the matching private key to access the VMs via SSH. [You can get this from the prerequisites section](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/aws_prerequisites.md#ssh-key-pair)
 
   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/Security27.png)
 
 
 ## 3. Accessing a Cluster  
-Once your cluster is up and running, click on the tile representing your cluster in the Cloudbreak UI to access information related the cluster and access cluster actions.
+Once your cluster is up and running (this might take a few minutes), click on the tile representing your cluster in the Cloudbreak UI to access information related the cluster and access cluster actions.
 
   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/AccessCluster_1.png)
   
@@ -162,6 +171,7 @@ Click on Clusters in the right menu, then click on a cluster name to see details
 - e.Terminate a cluster
 - f.Force terminate a cluster
 - g.View cluster history
+- h.History report content
 
   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/ManageCluster2.png)
 
@@ -203,27 +213,16 @@ For additional details visit [Cloudbreak documentation](https://hortonworks.gith
 #### a. Enable Auto Scaling  
    ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/EnableAutoscaling.png)
 
-#### b. Defining an Alert: 
-After you have enabled autoscaling, create a metric-based or time-based alert.
-Choose Time Based
-Choose the right timezone.
-Use Linux Crontab Format: 
-30 08 10 06 *  
-30 – 30th Minute  
-08 – 08 AM  
-10 – 10th Day  
-06 – 6th Month (June)  
-* – Every day of the week    
-
+#### b. Defining an Alert 
+After you have enabled autoscaling, define a metric-based or time-based alert.
    ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/Alert.png)
 
 #### c. Creating a Scaling Policy
-1. In the Policy Configuration section, provide needed information.   
-2. You will be using the Alert created in the above section. When the alert is triggered then this scaling policy will be applied.  
-3. Click + to save the Scaling Policy.  
+1. In the Policy Configuration section, provide needed information:
+2. Click + to save the alert
    ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/PolicyConfiguration.png)
    
-#### d. Configure Autoscaling Settings:
+#### d. Configure Autoscaling Settings
 After enabling autoscaling, perform these steps to configure the auto scaling settings for your cluster.
   - 1. In the Cluster Scaling Configuration, provide the following information:
       - Cooldown time: After an auto scaling event occurs, the amount of time to wait before enforcing another scaling policy.	
@@ -236,15 +235,11 @@ After enabling autoscaling, perform these steps to configure the auto scaling se
 #### 2 new Worker nodes are being requested at 21:33 as per the Time based Alert
    ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/AutoScaledHistory_1.png)
 
-#### 2 new Worker nodes are created.
+#### 2 new Worker nodes are created
    ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/AutoScalesHistory_2.png)
 
-Look in AWS Dashboard for the newly created nodes.  
-
-Once you are done accessing the cluster, You can now terminate the cluster and get started with Section 6 to create a new HDF cluster.  
-
-   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/Terminate.png)
-
+Look in Azure Dashboard for the newly created nodes.
+   ![Image](https://github.com/purn1mak/HadoopSummitCloudbreak/blob/master/AutoscaledNodesAzure.png)
 
 ## 6. Creating an HDF cluster on AWS
 As of Cloudbreak 2.7, you can deploy Hortonworks Data Flow (HDF) clusters.  Currently there are two HDF cluster types supported: Flow Management (NiFi) and Messaging Management (Kafka).  We will walk you through deploying an HDF 3.1 Flow Management cluster using Cloudbreak 2.7.
@@ -261,7 +256,7 @@ By default, the General Configuration screen is displayed using the `BASIC` view
 
 **Cluster Name**: Enter a name for your cluster. The name must be between 5 and 40 characters, must start with a letter, and must only include lowercase letters, numbers, and hyphens.
 
-**Region**: Select the region in w`hich you would like to launch your cluster.
+**Region**: Select the region in which you would like to launch your cluster.
 
 **Platform Version**: Cloudbreak currently defaults to HDP 2.6.  Select the dropdown arrow and select `HDF 3.1`.
 
@@ -326,10 +321,14 @@ You will be presented with the Ambari login page.  You will login using the user
 
    ![Image](https://github.com/jaraxal/HadoopSummitCloudbreak/blob/master/ambari-login.png)
 
-You should see the cluster summary screen.  As you can see, we have a cluster with Zookeeper, NiFi, and the NiFi Registry.
+You should see the cluster summary screen.  As you can see, we have a cluster with Zookeeper, Ambari Metrics, NiFi, and the NiFi Registry.
 
    ![Image](https://github.com/jaraxal/HadoopSummitCloudbreak/blob/master/ambari-summary.png)
 
 Click on the `NiFi` service in the left hand menu.  Now you can access the `Quick Links` menu for a shortcut to the NiFi UI.
 
    ![Image](https://github.com/jaraxal/HadoopSummitCloudbreak/blob/master/ambari-nifi.png)
+   
+
+## 7. Further Resources 
+ -
